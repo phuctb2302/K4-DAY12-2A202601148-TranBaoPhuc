@@ -62,7 +62,7 @@ def get_cost_guard() -> CostGuard:
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
     """CHO SẴN — chạy lúc app khởi động và lúc tắt."""
-    shutdown_guard.arm()
+    # shutdown_guard.arm()  # Tạm comment để CP1 chạy được, sẽ mở lại ở CP4
     emit("service_started", service=SERVICE_NAME, version=SERVICE_VERSION)
     yield
     emit("service_stopped", service=SERVICE_NAME)
