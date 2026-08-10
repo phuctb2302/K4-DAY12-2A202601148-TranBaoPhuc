@@ -1,6 +1,37 @@
-# TODO (CP2): file này quyết định thứ KHÔNG được copy vào image.
-# Bỏ sót .env = leak secret vào image. Bỏ sót .git = image phình to.
-# Bổ sung đủ các mục còn thiếu — xem tests/test_cp2.py để biết yêu cầu.
+# ═══════════════════════════════════════════════════════════════════
+# .dockerignore — quyết định thứ KHÔNG được copy vào image
+#
+# Quy tắc: loại trừ mọi thứ không cần thiết cho runtime
+#   - .env       → chứa secret, TUYỆT ĐỐI không được vào image
+#   - .venv      → image tự cài lại từ requirements.txt
+#   - .git       → lịch sử git làm image phình to vô ích
+#   - tests      → code test không cần thiết khi chạy production
+#   - __pycache__ → Python tự tạo lại, không cần đóng gói vào
+# ═══════════════════════════════════════════════════════════════════
 
+# Secret — tuyệt đối không được vào image
+.env
+
+# Git
 .git
 .gitignore
+
+# Môi trường ảo — image tự cài lại
+.venv
+
+# Python cache
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache
+
+# Test & dev files
+tests/
+*.md
+screenshots/
+nginx/
+
+# IDE
+.vscode/
+.idea/
